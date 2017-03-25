@@ -20,6 +20,22 @@ class SuperHeroDetailViewControllerTests: ScreenshotTest {
 
         verify(viewController: viewController)
     }
+    
+    func testShowsSuperHeroWithoutName() {
+        let superHero = givenASuperHeroWithoutName(isAvenger: false)
+        
+        let viewController = getSuperHeroDetailViewController(superHero.name)
+        
+        verify(viewController: viewController)
+    }
+    
+    func testShowsSuperHeroWithLongName() {
+        let superHero = givenASuperHeroWithLongName(isAvenger: false)
+        
+        let viewController = getSuperHeroDetailViewController(superHero.name)
+        
+        verify(viewController: viewController)
+    }
 
     func testShowsSuperHeroWithBadge() {
         let superHero = givenASuperHero(isAvenger: true)
@@ -31,6 +47,18 @@ class SuperHeroDetailViewControllerTests: ScreenshotTest {
 
     func givenASuperHero(isAvenger: Bool) -> SuperHero {
         let superHero = SuperHeroMother.givenASuperHero(isAvenger: isAvenger)
+        repository.superHeroes = [superHero]
+        return superHero
+    }
+    
+    func givenASuperHeroWithoutName(isAvenger: Bool) -> SuperHero {
+        let superHero = SuperHeroMother.givenASuperHero(name: "", isAvenger: isAvenger)
+        repository.superHeroes = [superHero]
+        return superHero
+    }
+    
+    func givenASuperHeroWithLongName(isAvenger: Bool) -> SuperHero {
+        let superHero = SuperHeroMother.givenASuperHero(name: "adjlakfjdslgskdfngdsklgawpgnapgnfañsdasnfkjsdngiwabgaug", isAvenger: isAvenger)
         repository.superHeroes = [superHero]
         return superHero
     }
